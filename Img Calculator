@@ -1,0 +1,95 @@
+import java.util.Scanner;
+class Calculator
+{
+    int real;
+    int img;
+    static int choice;
+    Calculator(){}
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        Calculator n1 = new Calculator();
+        Calculator n2 = new Calculator();
+
+        System.out.println("Enter first complex number: \nreal: ");
+        n1.real = sc.nextInt();
+
+        System.out.println("\nImaginary");
+        n1.img = sc.nextInt();
+
+        System.out.println("Enter second complex number: \nreal: ");
+        n2.real = sc.nextInt();
+
+        System.out.println("\nImaginary");
+        n2.img = sc.nextInt();
+
+        do {
+
+            System.out.println("Enter your choice");
+            System.out.println("1. Addition");
+            System.out.println("2. Subtraction");
+            System.out.println("3. Multiplication");
+            System.out.println("4. Division");
+
+            int choice = sc.nextInt();
+
+            switch(choice) {
+
+
+                case 1: Calculator addition = sum(n1,n2);
+                    System.out.println("The addition of two numbers is: "+addition.real+" + "+addition.img+"i");
+
+                    break;
+
+                case 2: Calculator substraction = sub(n1,n2);
+                    System.out.println("The substraction of two numbers is: "+substraction.real+" + "+substraction.img+"i");
+
+                    break;
+
+                case 3: Calculator multiplication = mult(n1,n2);
+                    System.out.println("The addition of two numbers is: "+multiplication.real+" + "+multiplication.img+"i");
+
+                    break;
+
+                case 4: Calculator division = div(n1,n2);
+                    System.out.println("The division of two numbers is: "+division.real+" + "+division.img+"i");
+
+                    break;
+
+                case 0:System.out.println("Exit");
+
+                    break;
+            }
+        }while(choice==0);
+    }
+    private static Calculator sum(Calculator n1 , Calculator n2)
+    {
+        Calculator ans = new Calculator();
+        ans.real = (n1.real + n2.real);
+        ans.img = n1.img + n2.img;
+        return ans;
+    }
+    private static Calculator sub(Calculator n1 , Calculator n2)
+    {
+        Calculator ans = new Calculator();
+        ans.real = (n1.real - n2.real);
+        ans.img = n1.img - n2.img;
+        return ans;
+    }
+    private static Calculator mult(Calculator n1 , Calculator n2)
+    {
+        Calculator ans = new Calculator();
+        ans.real = (n1.real * n2.real);
+        ans.img = n1.img * n2.img;
+        return ans;
+    }
+    private static Calculator div(Calculator n1 , Calculator n2)
+    {
+        Calculator ans = new Calculator();
+        ans.real = (n1.real / n2.real);
+        ans.img = n1.img / n2.img;
+        return ans;
+    }
+}
