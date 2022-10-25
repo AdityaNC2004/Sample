@@ -1,0 +1,110 @@
+import java.util.Scanner;
+public class Polymorphism
+{
+    int price;
+    int copies;
+    String title;
+    void SaleCopy()
+    {
+
+    }
+}
+
+class Book extends Polymorphism
+{
+    String title,author;
+    int price = 150;
+    int copies,sale;
+
+    int issue;
+
+    @Override
+    void SaleCopy() {
+        super.SaleCopy();
+        sale = price*copies;
+
+        System.out.println("\nName of author is "+author);
+        System.out.println("\nName of book "+title);
+        System.out.println("\nTotal sale for books is: "+sale);
+        System.out.println("\nBook issue date: "+issue);
+    }
+    void OrderCopies()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nEnter No. of copies of books: ");
+        copies = sc.nextInt();
+
+        System.out.println("\nEnter author name: ");
+        author = sc.next();
+
+        System.out.println("\nEnter book name: ");
+        title = sc.next();
+
+        System.out.println("\nEnter issue date: ");
+        issue = sc.nextInt();
+    }
+}
+class Magzine extends Polymorphism
+{
+    String title,author;
+    int price = 50;
+    int cop,sale,issue;
+    String current_issue;
+
+    void SaleCopy()
+    {
+        //Scanner sc = new Scanner(System.in);
+        super.SaleCopy();
+        sale = price*cop;
+        System.out.println("\nSale for magazine is: "+sale);
+        //copies = sc.nextInt();
+        System.out.println("\nName of author is "+author);
+        System.out.println("\nName of Magazine "+title);
+        System.out.println("\nMagazine issue date is: "+issue);
+        System.out.println("\nTotal sale for magazine is: "+sale);
+
+    }
+
+    void OrderQyt()
+    {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("\nEnter No. of copies of magazine: ");
+        cop = sc.nextInt();
+
+        System.out.println("\nEnter author name");
+        author = sc.next();
+
+        System.out.println("\nEnter Magazine name");
+        title = sc.next();
+
+        System.out.println("\nEnter issue date: ");
+        issue = sc.nextInt();
+
+        System.out.println("\nEnter Current issue: ");
+        current_issue = sc.nextLine();
+    }
+
+    void current_issue()
+    {
+        System.out.println("This is current issue "+current_issue);
+    }
+    void recieve_Issue()
+    {
+        System.out.println("Issue recieved is: "+current_issue);
+    }
+}
+class gargi
+{
+    public static void main(String[] args) {
+        Book b = new Book();
+        b.OrderCopies();
+        b.SaleCopy();
+
+        Magzine m = new Magzine();
+        m.OrderQyt();
+        m.SaleCopy();
+
+    }
+}
+
