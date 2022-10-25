@@ -1,0 +1,148 @@
+import java.util.Scanner;
+
+public class Inheritance
+{
+    float da, hra, basic, cf, pf;
+    long Mobile_no;
+    int id;
+    static int choice = 0;
+    String Mail_id;
+    String Address;
+    float gross,net;
+    String Emp_Name;
+    void Salary()
+    {
+        da = basic*97/100;
+        hra = basic*10/100;
+        pf = basic*12/100;
+        cf = basic*0.1f/100;
+
+        gross = da + hra + pf + cf;
+        net = hra + da - pf - cf;
+
+        System.out.println("Name of employee is: "+ Emp_Name);
+        System.out.println("Employee id is: "+ id);
+        System.out.println("Employee address is: "+Address);
+        System.out.println("Employee's Mobile Number is: "+Mobile_no);
+        System.out.println("Employee mail id is: "+Mail_id);
+        System.out.println("Gross salary of employee is: "+gross);
+        System.out.println("Net salary of employee is: "+net);
+        System.out.println("Basic pay of employee is: "+basic);
+    }
+
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println("\nEnter Employee name ");
+            String a = sc.next();
+
+            System.out.println("\nEnter Employee id ");
+            int b = sc.nextInt();
+
+            System.out.println("\nEnter Employee mobile no. ");
+            long c = sc.nextLong();
+            System.out.println("\nEnter Employee Mail id ");
+            String d = sc.next();
+
+            System.out.println("Enter Employee Address ");
+            String e = sc.next();
+
+            System.out.println("Enter Employee basic pay ");
+            float f = sc.nextFloat();
+            //p.salary
+            System.out.println("Enter your choice: ");
+            System.out.println("1. Programmer");
+            System.out.println("2. Assistant Programming Manager");
+            System.out.println("3. Programming Manager");
+            System.out.println("4. Team Leader");
+
+            int choice = sc.nextInt();
+            switch (choice)
+            {
+                case 1:
+                    Programmer1 p = new Programmer1(a, b, c, d, e, f);
+                    p.Salary();
+                    break;
+
+                case 2:
+                    APM apm = new APM(a, b, c, d, e, f);
+                    apm.Salary();
+                    break;
+
+                case 3:
+                    PM pm = new PM(a, b, c, d, e, f);
+                    pm.Salary();
+                    break;
+
+                case 4:
+                    TL tl = new TL(a, b, c, d, e, f);
+                    tl.Salary();
+                    break;
+
+                default:
+                    System.out.println("Exit");
+                    break;
+
+            }
+        }while(choice < 5);
+    }
+}
+class Programmer1 extends Inheritance
+
+{
+    Programmer1(String name,int eid, long mb,String mid ,String ad, float bp)
+    {
+        Emp_Name = name;
+        id = eid;
+        Mobile_no = mb;
+        Mail_id = mid;
+        Address = ad;
+        basic = bp;
+    }
+
+}
+
+
+class APM extends Inheritance
+{
+    APM(String name,int eid, long mb,String mid ,String ad, float bp)
+    {
+        Emp_Name = name;
+        id = eid;
+        Mobile_no = mb;
+        Mail_id = mid;
+        Address = ad;
+        basic = bp;
+
+    }
+
+}
+
+class PM extends Inheritance
+{
+    PM(String name,int eid, long mb,String mid ,String ad, float bp)
+    {
+        Emp_Name = name;
+        id = eid;
+        Mobile_no = mb;
+        Mail_id = mid;
+        Address = ad;
+        basic = bp;
+
+    }
+
+}
+
+class TL extends Inheritance
+{
+    TL(String name,int eid, long mb,String mid ,String ad, float bp)
+    {
+        Emp_Name = name;
+        id = eid;
+        Mobile_no = mb;
+        Mail_id = mid;
+        Address = ad;
+        basic = bp;
+    }
+}
