@@ -1,0 +1,366 @@
+import java.util.Scanner;
+class Account
+{
+    protected float bal,with,dep;
+    protected int accno,areacode;
+
+    public void enterBal()
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your account balance: ");
+        bal = sc.nextFloat();
+    }
+}
+
+class Withdraw extends Account {
+    protected int dob, pin, mainpin;
+    protected String name, surname, fullname;
+
+    Scanner sc = new Scanner(System.in);
+
+    public void accDetailsAccept() {
+        System.out.println("Account Holder Details: ");
+
+        System.out.println("First Name: ");
+        name = sc.nextLine();
+
+        System.out.println("Surname: ");
+        surname = sc.nextLine();
+
+        fullname = name + " " + surname;
+
+        System.out.println("Account no. ");
+        accno = sc.nextInt();
+
+        System.out.println("Date of Birth");
+        dob = sc.nextInt();
+
+        mainpin = dob;
+
+        System.out.println("Area Code: ");
+        areacode = sc.nextInt();
+        System.out.println("\n\n");
+    }
+
+    public void dispData() {
+        System.out.println("Account holder details:- ");
+        System.out.println("Name: " + fullname);
+        System.out.println("Account no: " + accno);
+        System.out.println("Date of Birth: " + dob);
+        System.out.println("Area Code: " + areacode);
+    }
+
+    public void checkBal() {
+        System.out.println("Your account balance is:- " + bal);
+    }
+
+    public void withdraw() {
+        System.out.println("Enter amount to be withdraw:-");
+        with = sc.nextInt();
+
+        if (with > bal) {
+            System.out.println("Insufficient Balance");
+        } else {
+            System.out.println("Rupees " + with + " withdrawn." +
+                    "\nYour new account balance is: " + (bal - with)+" rupees");
+            bal = bal - with;
+        }
+    }
+
+    public void deposit()
+    {
+        System.out.println("Enter amount to be deposited:- ");
+        dep = sc.nextLong();
+
+        System.out.println("Your account is deposited by "+dep+" rupees." +
+                "\nYour new accout balance is "+(bal+dep)+" rupees.");
+        bal = bal+dep;
+    }
+
+    void enterPin()
+    {
+        do
+        {
+            System.out.println("Enter your pin:- ");
+            pin = sc.nextInt();
+
+            if(pin == mainpin)
+            {
+                System.out.println("Welcome Back! ");
+                System.out.println();
+                break;
+            }
+            else
+            {
+                System.out.println("Incorrect pin! ");
+                System.out.println();
+                continue;
+            }
+        }while (pin!=mainpin);
+    }
+
+    public boolean search(int x)
+    {
+        if(accno == x)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
+class Deposit extends Account
+{
+    Scanner sc = new Scanner(System.in);
+    public void Text()
+    {
+        System.out.println("*****WELCOME TO OUR BANK*****");
+        System.out.println("Please enter your details:");
+        System.out.println("1.Manager \n2.Customer");
+        System.out.println();
+    }
+
+    public void menuCustomer()
+    {
+        System.out.println("*****CUSTOMER MAIN MENU*****\n\nSelect one option:");
+        System.out.println("1.Add account \n2.Access existing account \n3.Account Data \n4.Exit");
+        System.out.println("Enter your choice:- ");
+        System.out.println();
+    }
+
+    public void menu2()
+    {
+        System.out.println("*****ACCOUNT MENU*****\n\nChoose one option");
+        System.out.println("1.Check Account Balance \n2.Withdraw amount \n3.Deposit amount \n4.Exit");
+    }
+
+   public void menuManager()
+    {
+        System.out.println("*****MANAGER MAIN MENU*****\n\nChoose one option");
+        System.out.println("1.Delete account \n2.View account details \n3.Exit");
+        System.out.println("Enter your choice: ");
+        System.out.println();
+    }
+}
+
+class Bank
+{
+    public static void main(String[] args)
+    {
+        Deposit d = new Deposit();
+        Withdraw w[] = new Withdraw[100];
+        Scanner sc = new Scanner(System.in);
+        int c1,c2,c3,c4,n=0, i=0,j=0,k=0,flag=0,pin,mpin,an,del,disp;
+
+        char ans1,ans2 = 0;
+        do
+        {
+            d.Text();
+            c3 = sc.nextInt();
+            if(c3==1)
+            {
+                do
+                {
+                    System.out.println("Enter your pin: ");
+                    mpin = sc.nextInt();
+                    if(mpin == 123)
+                    {
+                        System.out.println("Welcome Back");
+                        System.out.println();
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("Incorrect pin, Try again");
+                        System.out.println();
+                        continue;
+                    }
+                }while (mpin!=123);
+
+                d.menuManager();
+                c4=sc.nextInt();
+                switch (c4)
+                {
+                    case 1:
+                        if (n==0)
+                    {
+                        System.out.println("Add your data first");
+                    }
+
+                        else
+                        {
+                            System.out.println("Enter account no. to be deleted: ");
+                            del=sc.nextInt();
+                            for (j=0;j<n-1;j++)
+                            {
+                                if(w[j].search(del))
+                                {
+                                    flag=1;
+                                    for (k=j;k<=n-2;k++)
+                                    {
+                                        w[k]=w[k+1];
+                                    }
+                                    n--;
+                                }
+                            }
+                        }
+                        if(flag == 1)
+                        {
+                            System.out.println("Data has been deleted");
+                            flag=0;
+                        }
+                        else
+                        {
+                            System.out.println("Account holder data dies not exist.");
+                            break;
+                        }
+
+                    case 2 :
+
+                        System.out.println("Enter account number whose data is to be displayed: ");
+                        disp=sc.nextInt();
+                        for (j=0;j<=n-1;j++)
+                        {
+                            if(w[j].search(disp))
+                            {
+                                w[i].dispData();
+                            }
+                            else
+                            {
+                                System.out.println("Account holder data does not exist.");
+                            }
+                        }
+                        break;
+
+                    case 3:
+                        System.out.println("Thank you! Have a good day!");
+                        break;
+
+                    default:
+                        System.out.println("Incorrect option!! Try again!");
+                        break;
+                }
+            }
+
+            if (c3==2)
+            {
+                do
+                {
+                    d.menuCustomer();
+                    c1=sc.nextInt();
+                    switch (c1)
+                    {
+                        case 1:
+                            n++;
+                            w[i]=new Withdraw();
+                            w[i].accDetailsAccept();
+                            i++;
+                            break;
+
+                        case 2:
+                            System.out.println("Enter account number: ");
+                            an = sc.nextInt();
+                            for (j=0;j<=n-1;j++)
+                            {
+                                if (w[j].search(an))
+                                {
+                                    w[j].enterPin();
+                                    w[j].enterBal();
+                                    System.out.println();
+                                    do
+                                    {
+                                        d.menu2();
+                                        System.out.println();
+                                        System.out.println("Enter your choice: ");
+                                        c2=sc.nextInt();
+                                        System.out.println("\n");
+                                        switch (c2)
+                                        {
+                                            case 1:
+                                            {
+                                                w[j].checkBal();
+                                                break;
+                                            }
+
+                                            case 2:
+                                            {
+                                                w[j].withdraw();
+                                                break;
+                                            }
+
+                                            case 3:
+                                            {
+                                                w[j].deposit();
+                                                break;
+                                            }
+
+                                            case 4:
+                                            {
+                                                System.out.println("Thank you!! Have a good day!!");
+                                                break;
+                                            }
+
+                                            default:
+                                            {
+                                                System.out.println("Incorrect option!! Try again later!");
+                                                break;
+                                            }
+                                        }
+                                        System.out.println("Do you want to perform another operation?(Y/N)");
+                                        ans1=sc.next().charAt(0);
+                                        if(ans1!='y'||ans1!='Y')
+                                        {
+                                            System.out.println("Thank You! Have a great day!");
+                                        }
+                                    }while (ans1=='y'||ans1=='Y');
+                                }
+                                else
+                                {
+                                    System.out.println("Account does not exist.");
+                                    System.out.println();
+                                }
+                            }
+                            break;
+
+                        case 3:
+                            System.out.println("Enter account no. whose data is to be displayed: ");
+                            disp=sc.nextInt();
+                            for (j=0;j<=n-1;j++)
+                            {
+                                if (w[j].search(disp))
+                                {
+                                    w[j].dispData();
+                                }
+                                else
+                                {
+                                    System.out.println("Account holder data does not exist.");
+                                }
+                            }
+                            break;
+
+                        case 4:
+                            System.out.println("Thank You! Have A Good Day!");
+                            break;
+
+                        default:
+                            System.out.println("Incorrect option. Try again.");
+                            break;
+                    }
+                }while (c1!=4);
+            }
+            else
+            {
+                System.out.println("Incorrect Option.Programme Has Been Terminated.");
+                System.out.println("Would you like to perform another operation? (Y/N)?");
+                ans2=sc.next().charAt(0);
+                if (ans2!='y'||ans2!='Y')
+                {
+                    System.out.println("Thanks! Have A Good Day!");
+                }
+            }
+        }while (ans2=='y'||ans2=='Y');
+    }
+}
